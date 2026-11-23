@@ -2,18 +2,18 @@
 
 An MCP server that gives agents real web access through the DeepSeek Search and Fetch APIs: one binary, no dependencies, works over stdio and HTTP.
 
-[![Release](https://img.shields.io/github/v/release/ggffggg00/deepseek-search-mcp)](https://github.com/ggffggg00/deepseek-search-mcp/releases) [![Go Version](https://img.shields.io/github/go-mod/go-version/ggffggg00/deepseek-search-mcp)](https://go.dev/)
+[![Release](https://img.shields.io/github/v/release/ggffggg00/deepseek-search-mcp)](https://github.com/ggffggg00/deepseek-search-mcp/releases) [![License](https://img.shields.io/github/license/ggffggg00/deepseek-search-mcp)](./LICENSE) [![Go Version](https://img.shields.io/github/go-mod/go-version/ggffggg00/deepseek-search-mcp)](https://go.dev/)
 
 Agents are good at reasoning and bad at knowing what happened last week. This server hands them two tools — search the web and read a page — backed by DeepSeek's search index. The project is a single static Go binary, so there is no Node runtime, no Python venv, and no `npx` in the startup path.
 
 ## Install
 
-Grab the archive for your platform from [Releases](https://github.com/beareravov/deepseek-search-mcp/releases). Every release ships Linux, macOS, and Windows builds for both `amd64` and `arm64`, named `deepseek-search-mcp_<version>_<os>_<arch>.tar.gz` (`.zip` on Windows), with `checksums.txt` next to them.
+Grab the archive for your platform from [Releases](https://github.com/ggffggg00/deepseek-search-mcp/releases). Every release ships Linux, macOS, and Windows builds for both `amd64` and `arm64`, named `deepseek-search-mcp_<version>_<os>_<arch>.tar.gz` (`.zip` on Windows), with `checksums.txt` next to them.
 
 With the GitHub CLI:
 
 ```sh
-gh release download --repo beareravov/deepseek-search-mcp --pattern '*_darwin_arm64.tar.gz' --dir .
+gh release download --repo ggffggg00/deepseek-search-mcp --pattern '*_darwin_arm64.tar.gz' --dir .
 tar -xzf deepseek-search-mcp_*_darwin_arm64.tar.gz
 sudo install -m 755 deepseek-search-mcp /usr/local/bin/
 ```
@@ -27,13 +27,13 @@ shasum -a 256 -c checksums.txt --ignore-missing
 If Go is already installed, one line does the same job:
 
 ```sh
-go install github.com/beareravov/deepseek-search-mcp/cmd/deepseek-search-mcp@latest
+go install github.com/ggffggg00/deepseek-search-mcp/cmd/deepseek-search-mcp@latest
 ```
 
 Or build from a checkout:
 
 ```sh
-git clone https://github.com/beareravov/deepseek-search-mcp.git
+git clone https://github.com/ggffggg00/deepseek-search-mcp.git
 cd deepseek-search-mcp
 make build
 ```
@@ -271,3 +271,7 @@ Search and Fetch are billed per successful request at $0.75 per 1,000 calls each
 Rate limits are per account: 100 QPS for Search, 25 QPS for Fetch, plus a per-domain limit on Fetch. Image search is not available on this API yet.
 
 Details in the [DeepSeek docs](https://api-docs.deepseek.com/guides/search/).
+
+## License
+
+MIT. See [LICENSE](LICENSE).

@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/beareravov/deepseek-search-mcp/internal/deepseek"
+	"github.com/ggffggg00/deepseek-search-mcp/internal/deepseek"
 )
 
 type fakeClient struct {

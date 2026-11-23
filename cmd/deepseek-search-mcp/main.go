@@ -15,8 +15,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/beareravov/deepseek-search-mcp/internal/deepseek"
-	"github.com/beareravov/deepseek-search-mcp/internal/server"
+	"github.com/ggffggg00/deepseek-search-mcp/internal/deepseek"
+	"github.com/ggffggg00/deepseek-search-mcp/internal/server"
 )
 
 var version = "dev"

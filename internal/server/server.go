@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"log/slog"
 
-	"github.com/beareravov/deepseek-search-mcp/internal/deepseek"
+	"github.com/ggffggg00/deepseek-search-mcp/internal/deepseek"
 )
 
 type Client interface {
