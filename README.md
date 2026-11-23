@@ -2,17 +2,35 @@
 
 An MCP server that gives agents real web access through the DeepSeek Search and Fetch APIs: one binary, no dependencies, works over stdio and HTTP.
 
-[![Go Version](https://img.shields.io/github/go-mod/go-version/beareravov/deepseek-search-mcp)](https://go.dev/)
+[![Release](https://img.shields.io/github/v/release/beareravov/deepseek-search-mcp)](https://github.com/beareravov/deepseek-search-mcp/releases) [![Go Version](https://img.shields.io/github/go-mod/go-version/beareravov/deepseek-search-mcp)](https://go.dev/)
 
 Agents are good at reasoning and bad at knowing what happened last week. This server hands them two tools — search the web and read a page — backed by DeepSeek's search index. The project is a single static Go binary, so there is no Node runtime, no Python venv, and no `npx` in the startup path.
 
 ## Install
 
+Grab the archive for your platform from [Releases](https://github.com/beareravov/deepseek-search-mcp/releases). Every release ships Linux, macOS, and Windows builds for both `amd64` and `arm64`, named `deepseek-search-mcp_<version>_<os>_<arch>.tar.gz` (`.zip` on Windows), with `checksums.txt` next to them.
+
+With the GitHub CLI:
+
+```sh
+gh release download --repo beareravov/deepseek-search-mcp --pattern '*_darwin_arm64.tar.gz' --dir .
+tar -xzf deepseek-search-mcp_*_darwin_arm64.tar.gz
+sudo install -m 755 deepseek-search-mcp /usr/local/bin/
+```
+
+Change `darwin_arm64` to `linux_amd64`, `windows_amd64`, or whatever matches your machine. To check the archive against the published checksums:
+
+```sh
+shasum -a 256 -c checksums.txt --ignore-missing
+```
+
+If Go is already installed, one line does the same job:
+
 ```sh
 go install github.com/beareravov/deepseek-search-mcp/cmd/deepseek-search-mcp@latest
 ```
 
-Or build from source:
+Or build from a checkout:
 
 ```sh
 git clone https://github.com/beareravov/deepseek-search-mcp.git
@@ -135,20 +153,25 @@ Create `.vscode/mcp.json`. This variant asks for the key on first start instead 
 }
 ```
 
-### Clients that only speak stdio
+### Any other stdio client
 
-Wrap the HTTP endpoint with [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) if the client has no HTTP transport:
+Nearly every MCP client uses the same three fields — command, arguments, environment — and the server needs nothing beyond them. Point the command at the binary, pass `stdio` as the argument, put the API key in the environment:
 
 ```json
 {
   "mcpServers": {
     "deepseek-search": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote", "http://127.0.0.1:8080/mcp"]
+      "command": "/absolute/path/to/deepseek-search-mcp",
+      "args": ["stdio"],
+      "env": {
+        "DEEPSEEK_API_KEY": "sk-..."
+      }
     }
   }
 }
 ```
+
+After `go install` the binary is already on `PATH`, so `"command": "deepseek-search-mcp"` works without a path. Clients differ in the wrapper around these fields: Zed calls the section `context_servers`, older ones want `"type": "stdio"` or an `"alwaysAllow"` list. The command, args, and env stay the same.
 
 ## Tools
 

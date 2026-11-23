@@ -3,7 +3,7 @@ PACKAGE := ./cmd/deepseek-search-mcp
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 LDFLAGS := -s -w -X main.version=$(VERSION)
 
-.PHONY: build install test race cover lint fmt vet clean
+.PHONY: build install test race cover lint fmt vet snapshot clean
 
 build:
 	@mkdir -p bin
@@ -31,6 +31,9 @@ vet:
 lint:
 	gofmt -l .
 	go vet ./...
+
+snapshot:
+	goreleaser release --snapshot --clean
 
 clean:
 	rm -rf bin coverage.out
