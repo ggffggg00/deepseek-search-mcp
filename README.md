@@ -2,7 +2,7 @@
 
 An MCP server that gives agents real web access through the DeepSeek Search and Fetch APIs: one binary, no dependencies, works over stdio and HTTP.
 
-[![Release](https://img.shields.io/github/v/release/beareravov/deepseek-search-mcp)](https://github.com/beareravov/deepseek-search-mcp/releases) [![Go Version](https://img.shields.io/github/go-mod/go-version/beareravov/deepseek-search-mcp)](https://go.dev/)
+[![Release](https://img.shields.io/github/v/release/ggffggg00/deepseek-search-mcp)](https://github.com/ggffggg00/deepseek-search-mcp/releases) [![Go Version](https://img.shields.io/github/go-mod/go-version/ggffggg00/deepseek-search-mcp)](https://go.dev/)
 
 Agents are good at reasoning and bad at knowing what happened last week. This server hands them two tools — search the web and read a page — backed by DeepSeek's search index. The project is a single static Go binary, so there is no Node runtime, no Python venv, and no `npx` in the startup path.
 
